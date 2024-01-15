@@ -84,3 +84,5 @@ class CSVAnalyzer:
         self.data.column_name = column_name
 
         self.check_csv_file()
+
+        input("Press Enter to exit...")
