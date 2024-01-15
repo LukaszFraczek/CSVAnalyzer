@@ -10,7 +10,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
+# dist/    in this particular case I want to include .exe file
 downloads/
 eggs/
 .eggs/
