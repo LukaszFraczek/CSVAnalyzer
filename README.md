@@ -28,7 +28,7 @@ This simple Python script allows you to check the longest value of a specified c
 ## Executable Usage (Windows)
 If you don't have Python installed, you can use the provided executable on Windows:
 
-1. Download the latest release from the [Releases](https://github.com/username/repo/releases) page.
+1. Download the latest release from the [Releases](https://github.com/LukaszFraczek/CSVAnalyzer/releases) page.
 
 2. Extract the ZIP file.
 
@@ -37,8 +37,8 @@ If you don't have Python installed, you can use the provided executable on Windo
 4. Follow steps 4 and 5 from the "How to Use" section above.
 
 ## License
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE.md).
 
 Feel free to use, modify, and distribute according to the terms of the license.
 
-If you encounter any issues, please open an [issue](https://github.com/username/repo/issues).
+If you encounter any issues, please open an [issue](https://github.com/LukaszFraczek/CSVAnalyzer/issues).
