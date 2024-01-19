@@ -21,7 +21,7 @@ class CSVAnalyzer:
     def __init__(self):
         self.data = CSVData("", "", 0, 0, 0)
 
-    def find_longest_value(self, csv_reader, column_name):
+    def find_longest_value(self, csv_reader: csv.DictReader, column_name: str) -> None:
         longest_value_len = 0
         longest_value_row = 0
         row_idx = 0
@@ -38,7 +38,7 @@ class CSVAnalyzer:
         self.data.longest_value_row = longest_value_row
         self.data.longest_value_len = longest_value_len
 
-    def create_results_file(self):
+    def create_results_file(self) -> str:
         current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         file_name = f"{self.data.file_name}_results_{current_time}.txt"
 
@@ -50,12 +50,12 @@ class CSVAnalyzer:
 
         return file_name
 
-    def analyze_csv_file(self):
+    def analyze_csv_file(self) -> None:
         with open(self.data.file_name, 'r', encoding='utf-8') as file:
             csv_reader = csv.DictReader(file)
             self.find_longest_value(csv_reader, self.data.column_name)
 
-    def file_exist(self, file_name):
+    def file_exist(self, file_name: str) -> bool:
         if not os.path.isfile(file_name):
             print(f"File '{file_name}' not found in the script's directory...")
             return False
@@ -63,7 +63,7 @@ class CSVAnalyzer:
         self.data.file_name = file_name
         return True
 
-    def column_exist(self, column_name):
+    def column_exist(self, column_name: str) -> bool:
         with open(self.data.file_name, 'r', encoding='utf-8') as file:
             fieldnames = csv.DictReader(file).fieldnames
 
@@ -74,7 +74,7 @@ class CSVAnalyzer:
         self.data.column_name = column_name
         return True
 
-    def run(self):
+    def run(self) -> None:
         file_name = input("Enter the CSV file name: ")
         if self.file_exist(file_name):
             column_name = input("Enter the column name to check: ")
