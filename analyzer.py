@@ -55,9 +55,7 @@ class CSVAnalyzer:
             csv_reader = csv.DictReader(file)
             self.find_longest_value(csv_reader, self.data.column_name)
 
-    def file_exist(self):
-        file_name = input("Enter the CSV file name: ")
-
+    def file_exist(self, file_name):
         if not os.path.isfile(file_name):
             print(f"File '{file_name}' not found in the script's directory...")
             return False
@@ -65,9 +63,7 @@ class CSVAnalyzer:
         self.data.file_name = file_name
         return True
 
-    def column_exist(self):
-        column_name = input("Enter the column name to check: ")
-
+    def column_exist(self, column_name):
         with open(self.data.file_name, 'r', encoding='utf-8') as file:
             fieldnames = csv.DictReader(file).fieldnames
 
@@ -79,9 +75,12 @@ class CSVAnalyzer:
         return True
 
     def run(self):
-        if self.file_exist() and self.column_exist():
-            self.analyze_csv_file()
-            results_file_name = self.create_results_file()
-            print(f"Analysis complete. Results saved to '{results_file_name}'.")
+        file_name = input("Enter the CSV file name: ")
+        if self.file_exist(file_name):
+            column_name = input("Enter the column name to check: ")
+            if self.column_exist(column_name):
+                self.analyze_csv_file()
+                results_file_name = self.create_results_file()
+                print(f"Analysis complete. Results saved to '{results_file_name}'.")
 
         input("Press Enter to exit...")
