@@ -19,7 +19,7 @@ class CSVAnalyzer:
     """Class for analyzing csv"""
 
     def __init__(self):
-        self.data = CSVData
+        self.data = CSVData("", "", 0, 0, 0)
 
     def analyze_csv_file(self, csv_reader, column_name):
         longest_value_len = 0

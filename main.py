@@ -1,4 +1,4 @@
-from analizer import CSVAnalyzer
+from analyzer import CSVAnalyzer
 
 
 def main():
