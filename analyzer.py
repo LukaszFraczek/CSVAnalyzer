@@ -21,17 +21,15 @@ class CSVAnalyzer:
     def __init__(self):
         self.data = CSVData("", "", 0, 0, 0)
 
-    def analyze_csv_file(self, csv_reader, column_name):
+    def find_longest_value(self, csv_reader, column_name):
         longest_value_len = 0
         longest_value_row = 0
         row_idx = 0
 
         for row_idx, row in enumerate(csv_reader, start=1):
-            # Access the specified column
             column_value = row[column_name]
-
-            # Check if current value length is bigger than last longest
             column_value_len = len(column_value)
+
             if column_value_len > longest_value_len:
                 longest_value_len = column_value_len
                 longest_value_row = row_idx
@@ -52,37 +50,38 @@ class CSVAnalyzer:
 
         return file_name
 
-    def check_csv_file(self):
-        # Check if the file exists
-        if not os.path.isfile(self.data.file_name):
-            print(f"File '{self.data.file_name}' not found in the script's directory. Exiting.")
-            return
-
-        # Open the CSV file
+    def analyze_csv_file(self):
         with open(self.data.file_name, 'r', encoding='utf-8') as file:
-            # Create a CSV reader
             csv_reader = csv.DictReader(file)
+            self.find_longest_value(csv_reader, self.data.column_name)
 
-            # Check if the column exists
-            if self.data.column_name not in csv_reader.fieldnames:
-                print(f"Column '{self.data.column_name}' not found in the CSV file. Exiting.")
-                return
-
-            # Analyze the file
-            self.analyze_csv_file(csv_reader, self.data.column_name)
-
-        # Create a log file and write results to it
-        results_file_name = self.create_results_file()
-
-        print(f"Analysis complete. Results saved to '{results_file_name}'.")
-
-    def run(self):
+    def file_exist(self):
         file_name = input("Enter the CSV file name: ")
+
+        if not os.path.isfile(file_name):
+            print(f"File '{file_name}' not found in the script's directory...")
+            return False
+        print(f"File found...")
+        self.data.file_name = file_name
+        return True
+
+    def column_exist(self):
         column_name = input("Enter the column name to check: ")
 
-        self.data.file_name = file_name
-        self.data.column_name = column_name
+        with open(self.data.file_name, 'r', encoding='utf-8') as file:
+            fieldnames = csv.DictReader(file).fieldnames
 
-        self.check_csv_file()
+        if column_name not in fieldnames:
+            print(f"Column '{column_name}' not found in the CSV file...")
+            return False
+        print(f"Column found...")
+        self.data.column_name = column_name
+        return True
+
+    def run(self):
+        if self.file_exist() and self.column_exist():
+            self.analyze_csv_file()
+            results_file_name = self.create_results_file()
+            print(f"Analysis complete. Results saved to '{results_file_name}'.")
 
         input("Press Enter to exit...")
